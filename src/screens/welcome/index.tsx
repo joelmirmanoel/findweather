@@ -1,11 +1,19 @@
 import React from 'react';
 import {Dimensions, Text, TouchableOpacity, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+
 import {styles} from './styles';
 import Brand from '../../assets/images/cloudAndThunder.svg';
 
 const {width, height} = Dimensions.get('window');
 
-export function WellcomeScrreen() {
+export function WelcomeScreen() {
+  const navigation = useNavigation();
+
+  function handleNavigateClick() {
+    navigation.navigate('homeEmpty');
+  }
+
   const percentageWidth = 0.61 * width;
   const percentageHeight = 0.26 * height;
 
@@ -22,7 +30,7 @@ export function WellcomeScrreen() {
         tão fácil ter a previsão do tempo na palma da sua mão
       </Text>
 
-      <TouchableOpacity style={styles.Button}>
+      <TouchableOpacity onPress={handleNavigateClick} style={styles.Button}>
         <Text style={styles.contentButton}>Iniciar</Text>
       </TouchableOpacity>
     </View>
