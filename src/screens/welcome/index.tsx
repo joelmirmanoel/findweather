@@ -1,36 +1,33 @@
 import React from 'react';
-import {Dimensions, Text, TouchableOpacity, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {Text, TouchableOpacity, View} from 'react-native';
 
 import {styles} from './styles';
 import Brand from '../../assets/images/cloudAndThunder.svg';
-
-const {width, height} = Dimensions.get('window');
+import {useNavigator} from '../../router';
+import {calculateDimension} from '../../utils';
 
 export function WelcomeScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigator();
 
   function handleNavigateClick() {
-    navigation.navigate('homeEmpty');
+    navigation.navigate('tabs');
   }
 
-  const percentageWidth = 0.61 * width;
-  const percentageHeight = 0.26 * height;
+  const {width, height} = calculateDimension({
+    percentHeight: 0.26,
+    percentWidth: 0.61,
+  });
 
   return (
-    <View style={styles.Container}>
-      <Brand
-        style={styles.image}
-        width={percentageWidth}
-        height={percentageHeight}
-      />
-      <Text style={styles.Title}>Descubra o Clima na sua Cidade </Text>
-      <Text style={styles.Content}>
+    <View style={styles.container}>
+      <Brand style={styles.image} width={width} height={height} />
+      <Text style={styles.title}>Descubra o Clima na sua Cidade </Text>
+      <Text style={styles.content}>
         Com o <Text style={styles.contentBold}>FindWeather</Text> nunca ficou
         tão fácil ter a previsão do tempo na palma da sua mão
       </Text>
 
-      <TouchableOpacity onPress={handleNavigateClick} style={styles.Button}>
+      <TouchableOpacity onPress={handleNavigateClick} style={styles.button}>
         <Text style={styles.contentButton}>Iniciar</Text>
       </TouchableOpacity>
     </View>

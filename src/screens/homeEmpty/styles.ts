@@ -1,32 +1,40 @@
 import {StyleSheet} from 'react-native';
 import {Theme} from '../../theme/styles.ts';
 
-export const stylesEmpty = StyleSheet.create({
-  containerHomeEmpty: {
+export const styles = StyleSheet.create({
+  container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Theme.colors.dark,
     paddingHorizontal: 20,
   },
-  textHomeEmpty: {
+
+  text400: {
     fontSize: 33,
     color: Theme.colors.white,
-    fontFamily: 'Overpass Regular',
+    fontFamily: Theme.fonts.regular,
   },
-  textHomeBold: {
+
+  text600: {
     fontSize: 33,
     color: Theme.colors.white,
-    fontFamily: 'Overpass Bold',
+    fontFamily: Theme.fonts.bold,
   },
-  ContentHome: {
+
+  image: {
+    marginTop: 40,
+    marginBottom: 60,
+  },
+
+  contentHome: {
     color: Theme.colors.gray100,
     fontSize: 22,
     marginTop: 30,
     paddingTop: 20,
     paddingBottom: 80,
     textAlign: 'center',
-    fontFamily: 'Overpass Regular',
+    fontFamily: Theme.fonts.regular,
     textDecorationLine: 'underline',
   },
 });

@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import {Theme} from '../../theme/styles';
 
 export const styles = StyleSheet.create({
-  Container: {
+  container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -15,14 +15,14 @@ export const styles = StyleSheet.create({
     marginBottom: 60,
   },
 
-  Title: {
+  title: {
     fontSize: 33,
     color: Theme.colors.white,
     fontFamily: 'Overpass Bold',
     textAlign: 'center',
   },
 
-  Content: {
+  content: {
     color: Theme.colors.gray100,
     fontSize: 22,
     marginTop: 30,
@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     borderLeftColor: Theme.colors.white,
   },
 
-  Button: {
+  button: {
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
