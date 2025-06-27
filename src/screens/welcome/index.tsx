@@ -16,6 +16,7 @@ export function WelcomeScreen() {
   const {width, height} = calculateDimension({
     percentHeight: 0.26,
     percentWidth: 0.61,
+    
   });
 
   return (
