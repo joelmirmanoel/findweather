@@ -1,100 +1,71 @@
-import {StyleSheet} from 'react-native';
-import {Theme} from '../../theme/styles.ts';
+import {Platform, StyleSheet} from 'react-native';
+import {Theme} from '../../theme';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: Theme.colors.dark,
+  },
+  content: {
+    flex: 1,
+    display: 'flex',
     paddingHorizontal: 20,
   },
-
-  iconBusca: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    paddingTop: 20,
+  contentHeader: {
+    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
+    justifyContent: 'space-between',
+    width: '100%',
+    marginTop: Platform.OS === 'android' ? 20 : 0,
   },
-
-  icon: {
-    fontSize: 40,
-    paddingRight: 40,
-    color: Theme.colors.gray600,
-  },
-
-  iconMaps: {
+  title: {
+    fontSize: 16,
     color: Theme.colors.white,
-    fontSize: 40,
+    textAlign: 'center',
+    fontFamily: Theme.fonts.regular,
   },
-
-  form: {
+  formContent: {
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 30,
+    marginBottom: 40,
     gap: 10,
   },
-
   inputContent: {
     width: '85%',
     height: 49,
+    flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: Theme.colors.dark400,
-    borderColor: Theme.colors.white,
-    borderWidth: 0,
+    paddingHorizontal: 15,
     borderRadius: 11,
-    left: 0,
-    flexDirection: 'row',
     gap: 10,
-    paddingHorizontal: 20,
   },
-
-  iconSearch1: {
-    fontSize: 19,
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: Theme.colors.white,
-  },
-
   input: {
     fontSize: 16,
     fontFamily: Theme.fonts.regular,
     color: Theme.colors.white,
+    width: '100%',
   },
-
-  iconButton: {
-    width: 49,
-    height: 49,
-    justifyContent: 'center',
+  backButton: {
+    backgroundColor: 'transparent',
+    borderRadius: 50,
     alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: Theme.colors.gray600,
+    borderWidth: 1,
+    height: 40,
+    width: 40,
+  },
+  buttonSearch: {
+    width: 48,
+    height: 48,
     backgroundColor: Theme.colors.dark400,
     borderRadius: 11,
-  },
-
-  image: {
-    marginTop: 50,
-    marginBottom: 20,
-  },
-
-  text: {
-    fontSize: 16,
-    fontFamily: Theme.fonts.regular,
     alignItems: 'center',
-    color: Theme.colors.white,
-    paddingHorizontal: 80,
-  },
-
-  textBold: {
-    fontFamily: Theme.fonts.bold,
-    fontSize: 16,
-    alignItems: 'center',
-    color: Theme.colors.gray100,
-    textAlign: 'center',
-    paddingBottom: 10,
+    justifyContent: 'center',
   },
 });

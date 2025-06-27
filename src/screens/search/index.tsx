@@ -1,63 +1,97 @@
-import {Text, TextInput, TouchableOpacity, View} from 'react-native';
-import Icons from 'react-native-vector-icons/AntDesign';
-import {styles} from './styles.ts';
-import Brand from '../../assets/images/not-found-destination@3x.svg';
-import React, {useState} from 'react';
-import {calculateDimension} from '../../utils';
-import {useNavigator} from '../../router';
-import {Theme} from '../../theme/styles.ts';
+import React from 'react';
+import {
+  FlatList,
+  SafeAreaView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
+import {useNavigator, useWeather, useGuardCity} from '../../hooks';
+import {getForestApi, getSearchApi} from '../../service/api.ts';
+
+import Icon from 'react-native-vector-icons/Octicons';
+import {CardTemp} from '../../components/app/cardTemp';
+import {Loading} from '../../components/app/loading';
+
+import {styles} from './styles.ts';
+import {Theme} from '../../theme';
+
+interface FormData {
+  value: string;
+}
 
 export function SearchScreen() {
-  const [search, setSearch] = useState<string>('');
-  const {control, handleSubmit} = useForm({
-    defaultValues: {search: ''},
+  const [search, setSearch] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(false);
+  const navigation = useNavigator();
+  const {setCity} = useGuardCity();
+  const {setWeatherData} = useWeather();
+  const {control, handleSubmit} = useForm<FormData>({
+    defaultValues: {value: ''},
   });
 
-  const {width, height} = calculateDimension({
-    percentHeight: 0.32,
-    percentWidth: 0.73,
-  });
+  function handleGoBack() {
+    navigation.goBack();
+  }
 
-  const onSubmit = date => console.log(date);
+  function onSubmit(data: FormData) {
+    getSearchApi({value: data.value}, setSearch, setLoading);
+    // getForestApi({value: data.value, days: 6}, setSearch, setLoading);
+    setCity(data.value);
+  }
+
+  function handlePressCard(item: any) {
+    setWeatherData(item);
+    navigation.navigate('home', {data: item});
+  }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.iconBusca}>
-        <Icons name="leftcircleo" style={styles.icon} />
-        <Text style={styles.text}>Busca</Text>
-      </View>
-      <View style={styles.form}>
-        <View style={styles.inputContent}>
-          <Icons name="search1" style={styles.iconSearch1} />
-          <Controller
-            control={control}
-            render={({field: {onChange, onBlur, value}}) => (
-              <TextInput
-                style={styles.input}
-                placeholder={'Digite o nome de uma cidade'}
-                value={value}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                placeholderTextColor={Theme.colors.gray200}
-              />
-            )}
-            name="search"
-          />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.content}>
+        <View style={styles.contentHeader}>
+          <TouchableOpacity onPress={handleGoBack} style={styles.backButton}>
+            <Icon name="chevron-left" size={25} color={Theme.colors.white} />
+          </TouchableOpacity>
+          <Text style={styles.title}>Busca</Text>
+          <View style={{width: 40}} />
         </View>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={handleSubmit(onSubmit)}>
-          <Icons name="enviroment" style={styles.iconMaps} />
-        </TouchableOpacity>
+        <View style={styles.formContent}>
+          <View style={styles.inputContent}>
+            <Icon name="search" size={19} color={Theme.colors.white} />
+            <Controller
+              control={control}
+              name="value"
+              render={({field: {onChange, onBlur, value}}) => (
+                <TextInput
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={onChange}
+                  placeholder="Digite o nome de uma cidade"
+                  placeholderTextColor={Theme.colors.gray200}
+                  style={styles.input}
+                />
+              )}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={handleSubmit(onSubmit)}
+            style={styles.buttonSearch}>
+            <Icon name="location" size={29} color={Theme.colors.white} />
+          </TouchableOpacity>
+        </View>
+        {search && (
+          <FlatList
+            data={search}
+            renderItem={({item}) => (
+              <CardTemp search={item} onPress={() => handlePressCard(item)} />
+            )}
+            showsVerticalScrollIndicator={false}
+          />
+        )}
+        {loading && <Loading />}
       </View>
-      <Brand style={styles.image} width={width} height={height} />
-      <View style={styles.textBold}>
-        <Text style={styles.textBold}>OPS!</Text>
-        <Text style={styles.textBold}>
-          {'Não foi possível encontrar o local \n desejado!'}
-        </Text>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 }

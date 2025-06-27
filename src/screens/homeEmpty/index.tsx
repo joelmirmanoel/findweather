@@ -1,31 +1,33 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import {calculateDimension} from '../../utils';
-import {useNavigator} from '../../router';
+import {Text, View, TouchableOpacity, Image} from 'react-native';
+import {useNavigator} from '../../hooks';
+
+import Brand from '../../assets/images/climate-change.svg';
+
 import {styles} from './styles.ts';
-import Brand from '../../assets/images/climateHomeEmpty.svg';
+import {calculateDimension} from '../../utils';
 
-export function HomeEmpty() {
+export function HomeEmptyScreen() {
   const navigation = useNavigator();
-
-  function handleNavigateClick() {
-    navigation.navigate('search');
-  }
 
   const {width, height} = calculateDimension({
     percentHeight: 0.32,
     percentWidth: 0.67,
   });
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text400}>
-        Find<Text style={styles.text600}>Weather</Text>
-      </Text>
+  function handleClick() {
+    navigation.navigate('search');
+  }
 
-      <Brand style={styles.image} width={width} height={height} />
-      <TouchableOpacity onPress={handleNavigateClick}>
-        <Text style={styles.contentHome}>
+  return (
+    <View style={styles.Container}>
+      <View style={styles.contentTitle}>
+        <Text style={styles.title400}>Find</Text>
+        <Text style={styles.title600}>Weather</Text>
+      </View>
+      <Brand width={width} height={height} />
+      <TouchableOpacity onPress={handleClick}>
+        <Text style={styles.buttonText}>
           {'Selecione aqui um local e \n encontre o clima em tempo real'}
         </Text>
       </TouchableOpacity>

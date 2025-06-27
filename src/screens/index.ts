@@ -1,3 +1,5 @@
-export {WelcomeScreen} from './welcome';
-export {HomeEmpty} from './homeEmpty';
+export {WellcomeScreen} from './wellcome';
+export {HomeEmptyScreen} from './homeEmpty';
 export {SearchScreen} from './search';
+export {HomeScreen} from './home';
+export {NextDaysScreen} from './nextDays';

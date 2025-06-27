@@ -1,38 +1,34 @@
 import {StyleSheet} from 'react-native';
-import {Theme} from '../../theme/styles.ts';
+import {Theme} from '../../theme';
 
 export const styles = StyleSheet.create({
-  container: {
+  Container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Theme.colors.dark,
+    display: 'flex',
     paddingHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    backgroundColor: Theme.colors.dark,
   },
-
-  text400: {
+  contentTitle: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  title400: {
     fontSize: 33,
     color: Theme.colors.white,
+    textAlign: 'center',
     fontFamily: Theme.fonts.regular,
   },
-
-  text600: {
+  title600: {
     fontSize: 33,
     color: Theme.colors.white,
+    textAlign: 'center',
     fontFamily: Theme.fonts.bold,
   },
-
-  image: {
-    marginTop: 40,
-    marginBottom: 60,
-  },
-
-  contentHome: {
-    color: Theme.colors.gray100,
+  buttonText: {
     fontSize: 22,
-    marginTop: 30,
-    paddingTop: 20,
-    paddingBottom: 80,
+    color: Theme.colors.gray100,
     textAlign: 'center',
     fontFamily: Theme.fonts.regular,
     textDecorationLine: 'underline',
